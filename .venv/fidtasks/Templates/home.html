@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FidTasks - Home</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='css/home_styles.css') }}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#!">FidTasks</a>
+                <a class="btn btn-primary" href="{{ url_for('users.login') }}">Sign In</a>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">Welcome to FidTasks! Helping you achieve your Goals efficiently and effectively.</h1>
+                            <p><a class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" href="{{ url_for('users.register') }}">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                            <h3>Goal Setting</h3>
+                            <p class="lead mb-0">We provide a platform to set and manage your goals, no matter the size!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                            <h3>Task Management</h3>
+                            <p class="lead mb-0">On top of setting your goals, you can create a tasks that move you steps closer to achieving your goals!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <h3>Easy to Use</h3>
+                            <p class="lead mb-0">Our platform is very user friendly and easy to use!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Image Showcases-->
+        <section class="showcase">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url({{ url_for('static', filename='img/R.jpg') }} )"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Goal Setting</h2>
+                        <p class="lead mb-0">Setting clear, achievable goals is key to progress within this application. This feature empowers you to define and track your journey effectively. It involves specifying your aims and breaking them into manageable steps with clear metrics. The application encourages using the SMART framework: Specific, Measurable, Achievable, Relevant, and Time-bound. Applying these principles turns vague ideas into concrete targets for focused action. Tools are provided to define, organize, prioritize, and link goals to tasks, ensuring daily efforts contribute to your objectives. Regular review will help you monitor progress and make adjustments, fostering ownership and increasing your likelihood of success.</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 text-white showcase-img" style="background-image: url({{ url_for('static', filename='img/Task.jpg') }})"></div>
+                    <div class="col-lg-6 my-auto showcase-text">
+                        <h2>Task Management</h2>
+                        <p class="lead mb-0">Efficient task management drives progress towards your goals within this application. This feature offers a structured way to organize, prioritize, and execute the steps needed to achieve your objectives. Easily create tasks, set deadlines and reminders, and categorize them by relevance and urgency. Break down complex goals into manageable actions, making projects feel less daunting. Visual cues help track task status. Linking tasks to goals ensures your activities align with your vision. Prioritization tools help focus on critical actions. This dynamic system helps you stay organized and in control, turning goals into reality through consistent action.</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url({{ url_for('static', filename='img/bg-showcase-3.jpg') }})"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Easy to Use</h2>
+                        <p class="lead mb-0">Navigating this application is designed to be an intuitive and seamless experience from the moment you begin. The clean and well-organized interface ensures that key features, such as goal setting and task management, are readily accessible without feeling overwhelming. Clear labeling, logical workflows, and helpful visual cues guide you through each step, minimizing any learning curve. Whether you're defining ambitious goals or managing daily tasks, the application's design prioritizes simplicity and efficiency, allowing you to focus on what truly matters – achieving your objectives. The straightforward layout and consistent design language across all sections contribute to a comfortable and user-friendly environment, making it easy to integrate this application into your daily routine and empowering you to take control of your productivity with confidence and ease.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials-->
+        <section class="testimonials text-center bg-light">
+            <div class="container">
+                <h2 class="mb-5">What people are saying...</h2>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/testimonials-1.jpg') }}" alt="..." />
+                            <h5>Margaret E.</h5>
+                            <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/testimonials-2.jpg') }}" alt="..." />
+                            <h5>Fred S.</h5>
+                            <p class="font-weight-light mb-0">"FidTasks is amazing. I've been using it to manage my goals and i absolutely love it!"</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/testimonials-3.jpg') }}" alt="..." />
+                            <h5>Sarah W.</h5>
+                            <p class="font-weight-light mb-0">"Thanks so much for making FidTasks available to us!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Call to Action-->
+        <section class="call-to-action text-white text-center" id="signup">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+                        <p><a class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" href="{{ url_for('users.register') }}">Sign Up</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="#!">About</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Contact</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Fidtasks <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item me-4">
+                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item me-4">
+                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='js/home_scripts') }}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

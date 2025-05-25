@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="table-responsive">
+{% if tasks.items %}
+<table class="table table-hover table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Goal</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Completed At</th>
+      <th scope="col" colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in tasks.items %}
+    <tr>
+      <td>{{ task.id }}</td>
+        <td>{{ task.goal.name }}</td>
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.created_at }}</td>
+        <td>{{ task.start_date }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>{{ task.updated_at }}</td>
+        <td>{{ task.completed_at }}</td>
+      <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('tasks.updateTasks', goal_id=goal_id, task_id=task.title) }}">Update</a></td>
+      {% if task.status == "Completed" %}
+        <td><button type="button" class="btn btn-outline-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#undoTaskCompletionModal">Undo Completion</button></td>
+      {% endif %}
+      <td><button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button></td>
+    </tr>
+
+<!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="{{ url_for('tasks.deleteTask', goal_id=goal_id, task_id=task.title) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="undoTaskCompletionModal" tabindex="-1" role="dialog" aria-labelledby="undoTaskCompletionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="undoTaskCompletionModalLabel">Undo Goal Completion Status?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to undo the completion status of this task?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('tasks.undoTaskCompletion', goal_id=goal_id, task_id=task.title) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Undo Completion">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+     </tbody>
+</table>
+          {% for page_num in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                     {% if tasks.page == page_num %}
+                          <a href="{{ url_for('tasks.viewTasks', goal_id=goal_id, page=page_num) }}" class="btn btn-info mb-4">{{ page_num }}</a>
+                     {% else %}
+                          <a href="{{ url_for('tasks.viewTasks', goal_id=goal_id, page=page_num) }}" class="btn btn-outline-info mb-4">{{ page_num }}</a>
+
+                     {% endif %}
+                {% else %}
+                     ....
+                {% endif %}
+          {% endfor %}
+{% else %}
+  <p class="text-center text-muted fst-italic mt-3">
+        <i class="fas fa-tasks-alt me-2"></i> There are currently no tasks associated with this goal.
+    </p>
+
+{% endif %}
+</div>
+{% endblock content %}

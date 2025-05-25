@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card-body d-flex flex-column align-items-center">
+
+    <form method="POST" action="">
+        <div class="container">
+        <!-- Adds a csrf token -->
+        {{ form.hidden_tag() }}
+        <div class="row mb-4">
+            <div class="col-md-12 text-center">
+                <h3>Add a New Task</h3>
+            </div>
+        </div>
+
+            <div class="row g-3 align-items-center">
+                <div class="col-md-6">
+
+                {{ form.goal.label(class="form-control-label") }}
+
+                {% if form.goal.errors %}
+                   {{ form.goal(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.goal.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.goal(class="form-control form-control-lg") }}
+                {% endif %}
+
+            </div>
+            <div class="col-md-6">
+
+                {{ form.title.label(class="form-control-label") }}
+
+                {% if form.title.errors %}
+                   {{ form.title(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.title(class="form-control form-control-lg") }}
+                {% endif %}
+
+            </div>
+            <div class="col-md-6">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors %}
+                   {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {{ form.priority.label(class="form-control-label") }}
+
+                {% if form.priority.errors %}
+                   {{ form.priority(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.priority.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.priority(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+                <div class="col-md-6">
+                {{ form.status.label(class="form-control-label") }}
+
+                {% if form.status.errors %}
+                   {{ form.status(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.status.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.status(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+                <div class="col-md-6">
+                {{ form.start_date.label(class="form-control-label") }}
+
+                {% if form.start_date.errors %}
+                   {{ form.start_date(class="form-control form-control-lg is-invalid datetimepicker") }}
+                <div class="invalid-feedback">
+                    {% for error in form.start_date.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.start_date(class="form-control form-control-lg datetimepicker") }}
+                {% endif %}
+            </div>
+                <div class="col-md-6">
+                {{ form.deadline.label(class="form-control-label") }}
+
+                {% if form.deadline.errors %}
+                   {{ form.deadline(class="form-control form-control-lg is-invalid datetimepicker") }}
+                <div class="invalid-feedback">
+                    {% for error in form.deadline.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.deadline(class="form-control form-control-lg datetimepicker") }}
+                {% endif %}
+            </div>
+
+        <div class="col-md-12 text-center">
+            {{ form.submit(class="btn btn-primary w-100") }}
+        </div>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+
+
+
+

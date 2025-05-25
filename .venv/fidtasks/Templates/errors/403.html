@@ -1,0 +1,13 @@
+{% extends "errors.html" %}
+{% block content %}
+<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>403</h1>
+			</div>
+			<h2>We are sorry, You don't have permission to do that.</h2>
+			<p>Please check your account and try again.</p>
+			<a href="{{ url_for('main.home') }}">Back To Homepage</a>
+		</div>
+	</div>
+{% endblock content %}

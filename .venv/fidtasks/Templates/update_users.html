@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card-body d-flex flex-column align-items-center">
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        <div class="container">
+        <!-- Adds a csrf token -->
+        {{ form.hidden_tag() }}
+        <div class="row mb-4">
+            <div class="col-md-12 text-center">
+                <h3>Update Account Information</h3>
+            </div>
+        </div>
+
+            <div class="row g-3 align-items-center">
+            <div class="col-md-6">
+
+                {{ form.username.label(class="form-control-label") }}
+
+                {% if form.username.errors %}
+                   {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+
+            </div>
+            <div class="col-md-6">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                   {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+                <div class="col-md-6">
+                {{ form.user_image.label(class="form-control-label") }}
+                {% if form.user_image.errors %}
+                   {{ form.user_image(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.user_image.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.user_image(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        <div class="col-md-12 text-center">
+            {{ form.submit(class="btn btn-primary w-100") }}
+        </div>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+

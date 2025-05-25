@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + task.goal.user.user_image) }}" alt="{{ task.goal.user.username }}">
+                <div class="media-body ms-3">
+                    <div class="article-metadata d-flex justify-content-between align-items-center">
+                        <div>
+                            <a class="fw-bold text-dark" href="#">{{ task.goal.name }}</a>
+                            <small class="text-muted">{{ task.created_at.strftime('%Y-%m-%d') }}</small>
+                        </div>
+                        {% if task.goal.user == current_user %}
+                        <div>
+                            <a class="btn btn-outline-secondary btn-sm mt-1 mb-1" href="{{ url_for('tasks.updateTasks', goal_id=goal.id, task_id=task.title) }}">Update</a>
+                            {% if task.status == "Completed" %}
+                            <button type="button" class="btn btn-outline-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#undoTaskCompletionModal">Undo Completion</button>
+                            {% endif %}
+                            <button type="button" class="btn btn-outline-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <h2 class="article-title">{{ task.title }}</h2>
+                    <p class="article-content"><span class="fw-bold">Description:</span> {{ task.description }}</p>
+                    <p class="article-content"><span class="fw-bold">Priority:</span>
+                        {% if task.priority == 'Very High' %}
+                            <span class="badge bg-danger">{{ task.priority }}</span>
+                        {% elif task.priority == 'High' %}
+                            <span class="badge bg-warning text-dark">{{ task.priority }}</span>
+                        {% elif task.priority == 'Medium' %}
+                            <span class="badge bg-info">{{ task.priority }}</span>
+                        {% else %}
+                            <span class="badge bg-success">{{ task.priority }}</span>
+                        {% endif %}
+                    </p>
+                    <p class="article-content"><span class="fw-bold">Status:</span>
+                        {% if task.status == 'In-Progress' %}
+                            <span class="badge bg-primary">{{ task.status }}</span>
+                        {% elif task.status == 'Completed' %}
+                            <span class="badge bg-success">{{ task.status }}</span>
+                        {% elif task.status == 'Pending' %}
+                            <span class="badge bg-warning text-dark">{{ task.status }}</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{{ task.status }}</span>
+                        {% endif %}
+                    </p>
+                    <p class="article-content"><span class="fw-bold">Start Date:</span> {{ task.start_date }}</p>
+                    <p class="article-content"><span class="fw-bold">Deadline:</span> {{ task.deadline }}</p>
+                    <p class="article-content"><span class="fw-bold">Updated At:</span> {{ task.updated_at }}</p>
+                    <p class="article-content"><span class="fw-bold">Completed At:</span> {{ task.completed_at if task.completed_at else 'Not Completed' }}</p>
+                </div>
+            </article>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="undoTaskCompletionModal" tabindex="-1" role="dialog" aria-labelledby="undoTaskCompletionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="undoTaskCompletionModalLabel">Undo Goal Completion Status?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to undo the completion status of this task?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('tasks.undoTaskCompletion', goal_id=goal.id, task_id=task.title) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Undo Completion">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this task? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('tasks.deleteTask', goal_id=goal.id, task_id=task.title) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="table-responsive">
+{% if goals.items %}
+<table class="table table-hover table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Sorted by date modified</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Completed At</th>
+      <th scope="col">Completion</th>
+      <th scope="col" colspan="5">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for goal in goals.items %}
+    <tr>
+      <td>{{ goal.id }}</td>
+      <td>{{ goal.name }}</td>
+      <td>{{ goal.description }}</td>
+        <td>{{ goal.category }}</td>
+        <td>{{ goal.priority }}</td>
+        <td>{{ goal.status }}</td>
+        <td>{{ goal.created_at }}</td>
+        <td>{{ goal.deadline }}</td>
+        <td>{{ goal.updated_at }}</td>
+        <td>{{ goal.completed_at }}</td>
+      <td>
+  <div style="background-color: #f1f1f1; border-radius: 10px; overflow: hidden; height: 20px; width: 100px;">
+    <div style="
+      width: {{ completion_percentages[goal.id]|default(0) }}%;
+      background-color:
+        {% if completion_percentages[goal.id] == 100 %}
+          #4caf50
+        {% elif completion_percentages[goal.id] >= 50 %}
+          #2196F3
+        {% else %}
+          #f44336
+        {% endif %};
+      height: 100%;
+      transition: width 0.5s;">
+    </div>
+  </div>
+  <small>{{ completion_percentages[goal.id]|default(0) }}%</small>
+</td>
+
+      <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('goals.viewGoal', goal_id=goal.id) }}">View More</a></td>
+      <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('tasks.viewTasks', goal_id=goal.id) }}">View Associated Tasks</a></td>
+      <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('goals.updateGoal', goal_id=goal.id) }}">Update</a></td>
+      {% if goal.status == "Completed" %}
+      <td><button type="button" class="btn btn-outline-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#undoGoalCompletionModal">Undo Completion</button></td>
+      {% endif %}
+      <td><button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button></td>
+    </tr>
+
+<!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Goal?</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="{{ url_for('goals.deleteGoal', goal_id=goal.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="undoGoalCompletionModal" tabindex="-1" role="dialog" aria-labelledby="undoGoalCompletionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="undoGoalCompletionModalLabel">Undo Goal Completion Status?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to undo the completion status of this goal?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('goals.undoGoalCompletion', goal_id=goal.id) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Undo Completion">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+   </tbody>
+</table>
+        {% for page_num in goals.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if goals.page == page_num %}
+                     <a href="{{ url_for('goals.viewGoals', page=page_num) }}" class="btn btn-info mb-4">{{ page_num }}</a>
+                {% else %}
+                     <a href="{{ url_for('goals.viewGoals', page=page_num) }}" class="btn btn-outline-info mb-4">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                 ....
+            {% endif %}
+        {% endfor %}
+{% else %}
+  <p class="text-center text-muted fst-italic mt-3">
+        <i class="fas fa-tasks-alt me-2"></i> There are currently no goals set
+    </p>
+
+{% endif %}
+</div>
+{% endblock content %}

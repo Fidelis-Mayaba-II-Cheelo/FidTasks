@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="content-section">
+                <div class="media d-flex align-items-center">
+                    <img class="rounded-circle account-img me-3" src="{{ user_image }}" alt="{{ current_user.username }}" style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="media-body">
+                        <h2 class="account-heading">{{ current_user.username }}</h2>
+                        <p class="text-muted">{{ current_user.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
