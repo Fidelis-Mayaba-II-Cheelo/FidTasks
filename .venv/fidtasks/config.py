@@ -2,7 +2,7 @@ import os
 
 class Config:
     # secret key for csrf
-    SECRET_KEY = '484cf8d93e56f8d6e7b6d9efeba11dc4'
+    SECRET_KEY = os.environ,get('SECRET_KEY')
 
     # for sql database definition
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
